@@ -18,7 +18,10 @@ var basePopup = cc.Class({
         this.node.active = true;
         this.label.string = content;
     },
-
+    closePopup: function () {
+        cc.log("close")
+        this.node.active = false;
+    },
     onLoad() {
         this.node.active = false;
         this.label.string = "12121";
