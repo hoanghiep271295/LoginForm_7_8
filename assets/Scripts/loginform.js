@@ -9,8 +9,10 @@
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
 var httpClient = require("./common/httpClient")
+var popup = require("./common/basePopup");
 cc.Class({
-    extends: cc.Component,
+    // extends: cc.Component,
+    extends: popup,
     properties: {
         btnDangNhap: cc.Button,
         btnDangKy: cc.Button,
@@ -21,12 +23,11 @@ cc.Class({
 
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad() {
-        this.node.destroy();
+        this.node.active = true;
         this.btnDangNhap.node.on('click', this.loginFunc, this);
     },
+
     loginFunc: function () {
         cc.log("dang nhap");
         var userName = this.txtUserName.string;
@@ -35,12 +36,18 @@ cc.Class({
         var url = httpClient.loginRequire(userName, pass, captcha);
         httpClient.sendRequest(url, null, null, this.loginSucess.bind(this), this.loginFaile.bind(this));
     },
+
     loginSucess: function (response) {
+        cc.log("response", response);
+        // var basePopup = this.getComponent("./common/basePopup");
+        // cc.log("basePopup", basePopup);
         var jsonData = JSON.parse(response);
         if (jsonData["e"] === 0) {
-            cc.log("jsondata", jsonData);
+            // cc.log("jsondata", jsonData);
+            this.openPopup("Đăng nhập thành công");
         } else {
-
+            // cc.log("jsondata", jsonData);
+            this.openPopup("Đăng nhập không thành công");
         }
     },
     loginFaile: function () {
