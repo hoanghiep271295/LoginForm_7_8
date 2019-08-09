@@ -9,7 +9,6 @@
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
 var httpClient = require("./common/httpClient");
-var popupBase = require("./common/basePopup");
 
 cc.Class({
     extends: cc.Component,
@@ -20,12 +19,14 @@ cc.Class({
         txtUserName: cc.EditBox,
         txtPass: cc.EditBox,
         txtCaptCha: cc.EditBox,
-        popup: popupBase
+        popup: cc.Prefab
     },
 
     onLoad() {
         this.node.active = true;
         this.btnDangNhap.node.on('click', this.loginFunc, this);
+        this.basePopup = cc.instantiate(this.popup);
+        this.node.addChild(this.basePopup);
     },
 
     loginFunc: function () {
@@ -38,22 +39,22 @@ cc.Class({
     },
 
     loginSucess: function (response) {
-        cc.log("response", response);
+        // cc.log("response", response);
         var jsonData = JSON.parse(response);
         if (jsonData["e"] === 0) {
             // cc.log("jsondata", jsonData);
             // this.popup.openPopup("Đăng nhập thành công");
             this.node.active = false;
-
-            this.node.runAction(cc.sequence(function () {
-                this.popup.openPopup("Đăng nhập thành công");
-            }.bind(this), cc.delayTime(3), this.popup.closePopup.bind(this)));
+            // this.popup.openPopup("Đăng nhập thành công");
 
             // this.popup.active = true;
             // this.popup.getChildByName("lbContent").getComponent(cc.Label).string = "Đăng nhập thành công";
 
             // this.openPopup("Đăng nhập thành công");
-            // this.basePopup.getComponent("basePopup").openPopup("Đăng nhập thành công");
+            cc.log("this.popup", this.popup);
+            cc.log("this.basePopup", this.basePopup);
+            this.basePopup.getComponent("basePopup").openPopup("Đăng nhập thành công");
+            // this.popup.getComponent("basePopup").openPopup("Đăng nhập thành công");
         } else {
             // cc.log("jsondata", jsonData);
             this.node.active = true;
@@ -61,7 +62,7 @@ cc.Class({
             // this.popup.active = true;
             // this.popup.getChildByName("lbContent").getComponent(cc.Label).string = "Đăng nhập không thành công";
             // this.popup.openPopup("Đăng nhập không thành công");
-            this.basePopup.getComponent("basePopup").openPopup("Đăng nhập thành công");
+            this.basePopup.getComponent("basePopup").openPopup("Đăng nhập không thành công");
         }
     },
     loginFaile: function () {

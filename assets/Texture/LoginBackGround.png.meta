@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.1",
+  "ver": "2.3.0",
   "uuid": "2698e041-1853-4d61-b251-2b10b46ae798",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,7 +7,7 @@
   "premultiplyAlpha": false,
   "platformSettings": {},
   "subMetas": {
-    "LoginBackGroud": {
+    "LoginBackGround": {
       "ver": "1.0.4",
       "uuid": "16990859-8f3a-4db9-939a-67f076f4783d",
       "rawTextureUuid": "2698e041-1853-4d61-b251-2b10b46ae798",

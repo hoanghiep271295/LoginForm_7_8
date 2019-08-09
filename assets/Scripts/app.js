@@ -8,27 +8,35 @@
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 
-var basePopup = cc.Class({
+cc.Class({
     extends: cc.Component,
 
     properties: {
-        label: cc.Label
-    },
-    openPopup: function (content) {
-        this.node.active = true;
-        this.label.string = content;
-    },
-    closePopup: function () {
-        cc.log("close")
-        this.node.active = false;
-    },
-    onLoad() {
-        this.node.active = false;
-        // this.label.string = "12121";
+        // foo: {
+        //     // ATTRIBUTES:
+        //     default: null,        // The default value will be used only when the component attaching
+        //                           // to a node for the first time
+        //     type: cc.SpriteFrame, // optional, default is typeof default
+        //     serializable: true,   // optional, default is true
+        // },
+        // bar: {
+        //     get () {
+        //         return this._bar;
+        //     },
+        //     set (value) {
+        //         this._bar = value;
+        //     }
+        // },
+        basePopup: cc.Prefab
     },
 
-    start() { },
+    // LIFE-CYCLE CALLBACKS:
+
+    // onLoad () {},
+
+    start() {
+
+    },
 
     // update (dt) {},
 });
-module.exports = basePopup;
